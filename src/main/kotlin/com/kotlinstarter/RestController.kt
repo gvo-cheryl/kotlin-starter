@@ -10,7 +10,6 @@ class RestController {
     @GetMapping("/")
     fun hello() {
         basic()
-
         // variable
         val sumInt = sum(3, 5)
         var sumInt2: Int = sum2(1, 2)
@@ -78,6 +77,16 @@ class RestController {
         // infix
         infix fun Int.times(str: String) = str.repeat(this)
         println(2 times "Bye")
+
+        // run
+        getNullableLength(null)
+        getNullableLength("")
+        getNullableLength("some string with Kotlin")
+
+        val result = "Kotlin".run {
+            println(this)
+            length
+        }
     }
 
     fun basic() {
@@ -114,6 +123,15 @@ class RestController {
             println(x * y)
         } else {
             println("$arg1 or $arg2 is not a number")
+        }
+    }
+
+    fun getNullableLength(ns: String?) {
+        println("for \"$ns\":")
+        ns?.run {                                                  // 1
+            println("\tis empty? " + isEmpty())                    // 2
+            println("\tlength = $length")
+            length                                                 // 3
         }
     }
 }
